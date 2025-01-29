@@ -2,10 +2,33 @@
 
 ## 📖 Sobre o Projeto
 Este projeto contém testes automatizados de API utilizando o **Cypress** para validar as funcionalidades da API [Serverest](https://serverest.dev/usuarios). Os testes incluem:
+- Consultar lista de usuários cadastrados
+    - Verifica se o status code é 200
+    - Verifica se o corpo da resposta contém a propriedade "usuarios"
+    - Verifica se "usuarios" é um array
+    - Verifica se a propriedade "quantidade" existe
+    - Verifica se a quantidade é igual ao tamanho do array "usuarios"
+    - Verifique o primeiro usuário na lista (se existir)
+
 - Cadastro de um usuário
+    - Verifica se o status code é 201 (Criado)
+    - Valida a mensagem de sucesso
+        
 - Consulta do usuário cadastrado
+    - Realiza a consulta do usuário
+    - Verifica se o status code é 200
+    - Valida os dados retornados
+
 - Alteração do nome do usuário
+    - Verifica se o status code é 200 (OK)
+    - Valida a mensagem de sucesso
+    
 - Exclusão do usuário e validação da remoção
+    - Verifica se o status code é 200
+    - Valida a mensagem de sucesso
+    - Realiza uma consulta para garantir que o usuário foi excluído
+    - Verifica se o status code é 400 (Não encontrado)
+    - Valida a mensagem de erro
 
 Além disso, os testes são executados automaticamente através de uma **pipeline de CI/CD** no **GitHub Actions**, gerando relatórios de execução.
 

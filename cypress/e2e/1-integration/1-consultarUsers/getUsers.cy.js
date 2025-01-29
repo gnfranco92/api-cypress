@@ -21,7 +21,7 @@ describe('Teste de API - Lista de Usuários', () => {
       // Verifica se a quantidade é igual ao tamanho do array "usuarios"
       expect(response.body.usuarios.length).to.eq(response.body.quantidade);
 
-      // Opcional: Verifique o primeiro usuário na lista (se existir)
+      // Verifique o primeiro usuário na lista (se existir)
       if (response.body.usuarios.length > 0) {
         const primeiroUsuario = response.body.usuarios[0];
         expect(primeiroUsuario).to.have.property('_id');

@@ -1,0 +1,46 @@
+name: CI - Cypress
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do repositório
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+
+      # Instalar dependências
+      - name: Install Dependencies
+        run: npm ci
+
+      # Executar os testes do Cypress
+      - name: Run Cypress Tests
+        run: |
+          npx cypress run --browser chrome --reporter mochawesome --reporter-options overwrite=false,html=false,json=true
+
+      # Gerar o relatório HTML consolidado
+      - name: Generate Test Report
+        run: |
+          npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json
+          npx mochawesome-report-generator cypress/reports/report.json -o cypress/reports/html
+
+      # Fazer upload do relatório como artefato
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-test-report
+          path: cypress/reports/html/

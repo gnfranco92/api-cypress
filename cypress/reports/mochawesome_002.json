@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-01-29T01:42:07.486Z",
+    "end": "2025-01-29T01:42:07.801Z",
+    "duration": 315,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1c39f2cb-7af0-4b27-9bfc-dd84b77962d7",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-integration\\3-consultarUser\\getUserById.cy.js",
+      "file": "cypress\\e2e\\1-integration\\3-consultarUser\\getUserById.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cf3d1622-d7ce-456e-9b2a-c766d8f5dbd8",
+          "title": "Teste de API - Consulta de Usuário",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve consultar o usuário cadastrado previamente",
+              "fullTitle": "Teste de API - Consulta de Usuário Deve consultar o usuário cadastrado previamente",
+              "timedOut": null,
+              "duration": 284,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Lê o ID do usuário salvo no arquivo JSON\ncy.readFile('cypress/fixtures/userData.json').then(userData => {\n  const userId = userData.id;\n  // Realiza a consulta do usuário\n  cy.request({\n    method: 'GET',\n    url: `${apiUrl}/${userId}`\n  }).then(response => {\n    // Verifica se o status code é 200\n    expect(response.status).to.eq(200);\n    // Valida os dados retornados\n    const user = response.body;\n    expect(user).to.have.property('_id', userId);\n    expect(user).to.have.property('nome', userData.nome);\n    expect(user).to.have.property('email', userData.email);\n    cy.log('Consulta de usuário realizada com sucesso.');\n  });\n});",
+              "err": {},
+              "uuid": "5d969f82-0915-4b9c-844f-6f493bd6d375",
+              "parentUUID": "cf3d1622-d7ce-456e-9b2a-c766d8f5dbd8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5d969f82-0915-4b9c-844f-6f493bd6d375"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 284,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

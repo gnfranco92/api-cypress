@@ -1,0 +1,108 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-01-29T01:35:28.392Z",
+    "end": "2025-01-29T01:35:28.873Z",
+    "duration": 481,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b5828524-fd40-4c0d-936b-e65e2bcf08ea",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-integration\\4-alterarUser\\putUser.cy.js",
+      "file": "cypress\\e2e\\1-integration\\4-alterarUser\\putUser.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "541c8480-7c46-42a6-b265-286c51c10a1e",
+          "title": "Teste de API - Alteração de Nome do Usuário",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve alterar o nome do usuário cadastrado anteriormente",
+              "fullTitle": "Teste de API - Alteração de Nome do Usuário Deve alterar o nome do usuário cadastrado anteriormente",
+              "timedOut": null,
+              "duration": 451,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Lê o ID do usuário salvo no arquivo JSON\ncy.readFile('cypress/fixtures/userData.json').then(userData => {\n  const userId = userData.id;\n  const novoNome = 'Teste Guilherme alterado';\n  // Envia a requisição de alteração (PUT)\n  cy.request({\n    method: 'PUT',\n    url: `${apiUrl}/${userId}`,\n    body: {\n      nome: novoNome,\n      email: userData.email,\n      password: 'senha123',\n      // A senha deve ser incluída no body para manter o formato correto\n      administrador: 'true'\n    }\n  }).then(response => {\n    // Verifica se o status code é 200 (OK)\n    expect(response.status).to.eq(200);\n    // Valida a mensagem de sucesso\n    expect(response.body).to.have.property('message', 'Registro alterado com sucesso');\n    // Atualiza o arquivo JSON com o novo nome\n    cy.writeFile('cypress/fixtures/userData.json', _objectSpread(_objectSpread({}, userData), {}, {\n      nome: novoNome\n    }));\n    cy.log('Nome do usuário alterado com sucesso.');\n  });\n});",
+              "err": {
+                "message": "AssertionError: expected 201 to equal 200",
+                "estack": "AssertionError: expected 201 to equal 200\n    at captureUserInvocationStack (http://localhost:59196/__cypress/runner/cypress_runner.js:138885:94)\n    at Proxy.<anonymous> (http://localhost:59196/__cypress/runner/cypress_runner.js:138913:9)\n    at Proxy.assertEqual (http://localhost:59196/__cypress/runner/cypress_runner.js:79842:12)\n    at Proxy.methodWrapper (http://localhost:59196/__cypress/runner/cypress_runner.js:77688:25)\n    at Context.eval (webpack:///./cypress/e2e/1-integration/4-alterarUser/putUser.cy.js:22:37)\n    at getRet (http://localhost:59196/__cypress/runner/cypress_runner.js:118338:20)\n    at tryCatcher (http://localhost:59196/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://localhost:59196/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (http://localhost:59196/__cypress/runner/cypress_runner.js:118349:66)\n    at Context.then (http://localhost:59196/__cypress/runner/cypress_runner.js:118600:21)",
+                "diff": "- 201\n+ 200\n"
+              },
+              "uuid": "f0d01c8b-26c3-4ad9-965a-ee7d0ff4ede0",
+              "parentUUID": "541c8480-7c46-42a6-b265-286c51c10a1e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f0d01c8b-26c3-4ad9-965a-ee7d0ff4ede0"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 451,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

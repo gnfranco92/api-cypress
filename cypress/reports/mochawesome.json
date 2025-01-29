@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-01-29T01:42:03.147Z",
+    "end": "2025-01-29T01:42:04.030Z",
+    "duration": 883,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "201f15c5-3ec3-4039-8d3e-1d1b16dc184f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-integration\\1-consultarUsers\\getUsers.cy.js",
+      "file": "cypress\\e2e\\1-integration\\1-consultarUsers\\getUsers.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5d4b1c97-8b69-4076-8bcb-22f06c625c30",
+          "title": "Teste de API - Lista de Usuários",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve retornar uma lista de usuários e validar a quantidade",
+              "fullTitle": "Teste de API - Lista de Usuários Deve retornar uma lista de usuários e validar a quantidade",
+              "timedOut": null,
+              "duration": 843,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: apiUrl\n}).then(response => {\n  // Verifica se o status code é 200\n  expect(response.status).to.eq(200);\n  // Verifica se o corpo da resposta contém a propriedade \"usuarios\"\n  expect(response.body).to.have.property('usuarios');\n  // Verifica se \"usuarios\" é um array\n  expect(response.body.usuarios).to.be.an('array');\n  // Verifica se a propriedade \"quantidade\" existe\n  expect(response.body).to.have.property('quantidade');\n  // Verifica se a quantidade é igual ao tamanho do array \"usuarios\"\n  expect(response.body.usuarios.length).to.eq(response.body.quantidade);\n  // Opcional: Verifique o primeiro usuário na lista (se existir)\n  if (response.body.usuarios.length > 0) {\n    const primeiroUsuario = response.body.usuarios[0];\n    expect(primeiroUsuario).to.have.property('_id');\n    expect(primeiroUsuario).to.have.property('nome');\n    expect(primeiroUsuario).to.have.property('email');\n    expect(primeiroUsuario).to.have.property('password');\n    expect(primeiroUsuario).to.have.property('administrador');\n  }\n});",
+              "err": {},
+              "uuid": "192554e7-e14d-462d-8030-9c6177a6e990",
+              "parentUUID": "5d4b1c97-8b69-4076-8bcb-22f06c625c30",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "192554e7-e14d-462d-8030-9c6177a6e990"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 843,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

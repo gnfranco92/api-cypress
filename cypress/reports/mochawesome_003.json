@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-01-29T01:42:09.357Z",
+    "end": "2025-01-29T01:42:09.736Z",
+    "duration": 379,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d7604d72-9282-468a-a0a3-bbeb2cb7d9f4",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-integration\\4-alterarUser\\putUser.cy.js",
+      "file": "cypress\\e2e\\1-integration\\4-alterarUser\\putUser.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "45605e6f-ff5f-486e-abfb-db1f807737e6",
+          "title": "Teste de API - Alteração de Nome do Usuário",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve alterar o nome do usuário cadastrado anteriormente",
+              "fullTitle": "Teste de API - Alteração de Nome do Usuário Deve alterar o nome do usuário cadastrado anteriormente",
+              "timedOut": null,
+              "duration": 353,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Lê o ID do usuário salvo no arquivo JSON\ncy.readFile('cypress/fixtures/userData.json').then(userData => {\n  const userId = userData.id;\n  const novoNome = 'Teste Guilherme alterado';\n  // Envia a requisição de alteração (PUT)\n  cy.request({\n    method: 'PUT',\n    url: `${apiUrl}/${userId}`,\n    body: {\n      nome: novoNome,\n      email: userData.email,\n      password: 'senha123',\n      // A senha deve ser incluída no body para manter o formato correto\n      administrador: 'true'\n    }\n  }).then(response => {\n    // Verifica se o status code é 200 (OK)\n    expect(response.status).to.eq(200);\n    // Valida a mensagem de sucesso\n    expect(response.body).to.have.property('message', 'Registro alterado com sucesso');\n    // Atualiza o arquivo JSON com o novo nome\n    cy.writeFile('cypress/fixtures/userData.json', _objectSpread(_objectSpread({}, userData), {}, {\n      nome: novoNome\n    }));\n    cy.log('Nome do usuário alterado com sucesso.');\n  });\n});",
+              "err": {},
+              "uuid": "f8af8438-af82-4100-912c-e28a105092a3",
+              "parentUUID": "45605e6f-ff5f-486e-abfb-db1f807737e6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f8af8438-af82-4100-912c-e28a105092a3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 353,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

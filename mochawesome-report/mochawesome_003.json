@@ -1,0 +1,108 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-01-29T01:35:30.501Z",
+    "end": "2025-01-29T01:35:30.944Z",
+    "duration": 443,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b80a4601-5825-473e-b97a-f8184af2cd72",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-integration\\5-excluirUser\\deleteUser.cy.js",
+      "file": "cypress\\e2e\\1-integration\\5-excluirUser\\deleteUser.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7d8c8642-2720-45ba-94b3-30ee0a1a435a",
+          "title": "Teste de API - Exclusão de Usuário",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve excluir o usuário e garantir que ele foi removido",
+              "fullTitle": "Teste de API - Exclusão de Usuário Deve excluir o usuário e garantir que ele foi removido",
+              "timedOut": null,
+              "duration": 409,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Lê o ID do usuário salvo no arquivo JSON\ncy.readFile('cypress/fixtures/userData.json').then(userData => {\n  const userId = userData.id;\n  // Envia a requisição para excluir o usuário\n  cy.request({\n    method: 'DELETE',\n    url: `${apiUrl}/${userId}`\n  }).then(response => {\n    // Verifica se o status code é 200\n    expect(response.status).to.eq(200);\n    // Valida a mensagem de sucesso\n    expect(response.body).to.have.property('message', 'Registro excluído com sucesso');\n    cy.log('Usuário excluído com sucesso.');\n    // Realiza uma consulta para garantir que o usuário foi excluído\n    cy.request({\n      method: 'GET',\n      url: `${apiUrl}/${userId}`,\n      failOnStatusCode: false // Permite que o teste continue se o status não for 2xx\n    }).then(getResponse => {\n      // Verifica se o status code é 400 (Não encontrado)\n      expect(getResponse.status).to.eq(400);\n      // Valida a mensagem de erro\n      expect(getResponse.body).to.have.property('message', 'Usuário não encontrado');\n      cy.log('Validação de exclusão confirmada.');\n    });\n  });\n});",
+              "err": {
+                "message": "AssertionError: expected { message: 'Nenhum registro excluído' } to have property 'message' of 'Registro excluído com sucesso', but got 'Nenhum registro excluído'",
+                "estack": "AssertionError: expected { message: 'Nenhum registro excluído' } to have property 'message' of 'Registro excluído com sucesso', but got 'Nenhum registro excluído'\n    at captureUserInvocationStack (http://localhost:59196/__cypress/runner/cypress_runner.js:138885:94)\n    at Proxy.<anonymous> (http://localhost:59196/__cypress/runner/cypress_runner.js:138913:9)\n    at Proxy.assertProperty (http://localhost:59196/__cypress/runner/cypress_runner.js:80689:12)\n    at Proxy.methodWrapper (http://localhost:59196/__cypress/runner/cypress_runner.js:77688:25)\n    at Context.eval (webpack:///./cypress/e2e/1-integration/5-excluirUser/deleteUser.cy.js:18:40)\n    at getRet (http://localhost:59196/__cypress/runner/cypress_runner.js:118338:20)\n    at tryCatcher (http://localhost:59196/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://localhost:59196/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (http://localhost:59196/__cypress/runner/cypress_runner.js:118349:66)\n    at Context.then (http://localhost:59196/__cypress/runner/cypress_runner.js:118600:21)",
+                "diff": "- 'Nenhum registro excluído'\n+ 'Registro excluído com sucesso'\n"
+              },
+              "uuid": "8c003fe3-383e-4ba1-a3be-df1dbade7b33",
+              "parentUUID": "7d8c8642-2720-45ba-94b3-30ee0a1a435a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "8c003fe3-383e-4ba1-a3be-df1dbade7b33"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 409,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

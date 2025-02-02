@@ -34,6 +34,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-
 
+      - name: Limpar cache do GitHub Actions
+        run: rm -rf .git
+
       # 4️⃣ Instalar dependências (Movido antes da verificação de arquivos)
       - name: Install Dependencies
         run: npm ci  # 🔹 Agora todas as dependências são instaladas antes de verificar arquivos

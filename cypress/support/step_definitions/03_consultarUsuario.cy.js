@@ -5,14 +5,12 @@ let userData;
 let response;
 
 Given("que o ID do usuário foi salvo previamente", () => {
-  // Lê o arquivo JSON com os dados do usuário salvo
   cy.readFile("cypress/fixtures/userData.json").then((data) => {
     userData = data;
   });
 });
 
 When("eu consulto o usuário pelo ID", () => {
-  // Garante que o dado foi carregado antes de executar a requisição
   cy.then(() => {
     const userId = userData.id;
     cy.request({

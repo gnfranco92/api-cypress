@@ -1,23 +1,18 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-// URL base da API
 const apiUrl = "https://serverest.dev/usuarios";
-
-let userData;   // Dados lidos do arquivo JSON
-let response;   // Armazena a resposta da requisição
-let novoNome;   // Novo nome a ser aplicado
+let userData;   
+let response;   
+let novoNome;   
 
 Given("que os dados do usuário foram previamente salvos", () => {
-  // Lê os dados do usuário salvos no arquivo JSON
   cy.readFile("cypress/fixtures/userData.json").then((data) => {
     userData = data;
   });
 });
 
 When("eu envio uma requisição PUT para alterar o nome do usuário para {string}", (nome) => {
-  // Armazena o novo nome recebido do step
   novoNome = nome;
-  // Garante que a leitura do arquivo já foi concluída antes de enviar a requisição
   cy.then(() => {
     cy.request({
       method: "PUT",
@@ -25,7 +20,7 @@ When("eu envio uma requisição PUT para alterar o nome do usuário para {string
       body: {
         nome: novoNome,
         email: userData.email,
-        password: "senha123",       // A senha é necessária para manter o formato correto
+        password: "senha123",      
         administrador: "true",
       },
     }).then((res) => {
@@ -43,7 +38,6 @@ Then("a mensagem de sucesso deve ser {string}", (message) => {
 });
 
 Then("os dados do usuário salvos devem ser atualizados com o novo nome", () => {
-  // Atualiza o arquivo JSON com o novo nome
   cy.writeFile("cypress/fixtures/userData.json", {
     ...userData,
     nome: novoNome,

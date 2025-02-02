@@ -23,7 +23,7 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/e2e/**/*.feature',
-    stepDefinitions: "cypress/support/step_definitions/**/*.{js,ts}",
+    stepDefinitions: "cypress/support/step_definitions/**/*.cy.{js,ts}",
     supportFile: 'cypress/support/e2e.js',
     reporter: 'mochawesome',
     reporterOptions: {

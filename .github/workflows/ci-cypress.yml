@@ -28,9 +28,9 @@ jobs:
         run: npm ci
 
       # Executar os testes do Cypress
-      - name: Run Cypress Tests
+      - name: Run Cypress Tests + Cucumber
         run: |
-          npx cypress run --browser chrome --reporter mochawesome --reporter-options overwrite=false,html=false,json=true
+          npx cypress run --spec "cypress/e2e/features/**/*.feature"
 
       # Gerar o relatório HTML consolidado
       - name: Generate Test Report

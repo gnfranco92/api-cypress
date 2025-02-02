@@ -15,14 +15,3 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import '@badeball/cypress-cucumber-preprocessor/support';
-
-Cypress.on('uncaught:exception', (err, runnable) => {
-  return false;
-});
-
-Cypress.on('test:after:run', (test, runnable) => {
-    if (test.state === 'failed') {
-      cy.screenshot(`${runnable.parent.title} -- ${test.title}`);
-    }
-  });

@@ -30,7 +30,7 @@ Este projeto contém testes automatizados de API utilizando o **Cypress** para v
     - Verifica se o status code é 400 (Não encontrado)
     - Valida a mensagem de erro
 
-Além disso, os testes são executados automaticamente através de uma **pipeline de CI/CD** no **GitHub Actions**, gerando relatórios de execução.
+Além disso, os testes são executados automaticamente ao realizar um push através de uma **pipeline de CI/CD** no **GitHub Actions**, gerando relatórios de execução.
 
 ---
 
@@ -123,5 +123,5 @@ Caso tenha dúvidas ou sugestões, entre em contato através do e-mail: **gnetof
 
 ---
 
-### 🎯 **Bom trabalho e bons testes! 🚀**
-### PS: Estou ansioso pelo feedback :D
+### 🎯 **Bons testes! 🚀**
+### PS: **Estou ansioso pelo feedback :D**

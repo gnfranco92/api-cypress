@@ -1,4 +1,3 @@
-// cypress/e2e/consulta/consultarUsuario.cy.js
 describe('Teste de API - Consulta de Usuário', () => {
     const apiUrl = 'https://serverest.dev/usuarios';
   

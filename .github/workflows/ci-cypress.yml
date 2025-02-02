@@ -22,7 +22,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
-
+      - name: Limpar cache do Node.js
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+  
       # Instalar dependências
       - name: Install Dependencies
         run: npm ci

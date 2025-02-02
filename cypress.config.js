@@ -23,7 +23,8 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/e2e/**/*.feature',
-    supportFile: false, // Se não houver um arquivo de suporte
+    stepDefinitions: "cypress/support/step_definitions/**/*.{js,ts}",
+    supportFile: 'cypress/support/e2e.js',
     reporter: 'mochawesome',
     reporterOptions: {
       reportDir: 'cypress/reports',

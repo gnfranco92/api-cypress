@@ -37,7 +37,7 @@ When("eu envio uma requisição GET para consultar o usuário", () => {
     cy.request({
       method: "GET",
       url: `${apiUrl}/${userId}`,
-      failOnStatusCode: 
+      failOnStatusCode: false,
     }).then((res) => {
       getResponse = res;
     });

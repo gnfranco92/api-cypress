@@ -17,13 +17,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Limpar cache do Node.js
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+      - name: Limpar cache do GitHub Actions
+        run: rm -rf .git      
 
       - name: Verificar arquivos na pipeline
         run: ls -R cypress/e2e/features/

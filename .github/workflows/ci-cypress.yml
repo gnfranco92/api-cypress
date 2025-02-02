@@ -17,11 +17,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Configurar Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
       - name: Limpar cache do Node.js
         uses: actions/cache@v3
         with:
@@ -29,7 +24,16 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-  
+
+      - name: Verificar arquivos na pipeline
+        run: ls -R cypress/e2e/features/
+
+      # Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+ 
       # Instalar dependências
       - name: Install Dependencies
         run: npm ci

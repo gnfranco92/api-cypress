@@ -40,7 +40,7 @@ jobs:
 
       # Fazer upload do relatório como artefato
       - name: Upload Test Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-test-report
           path: cypress/reports/html/

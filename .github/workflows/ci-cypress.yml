@@ -13,38 +13,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do repositório
+      # 1️⃣ Checkout do repositório (Mantido igual)
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 🔹 Certifica que todo o repositório é baixado
 
-      - name: Limpar cache do GitHub Actions
-        run: rm -rf .git      
-
-      - name: Verificar arquivos na pipeline
-        run: ls -R cypress/e2e/features/
-
-      # Configurar Node.js
+      # 2️⃣ Configurar Node.js (Movido para antes da instalação das dependências)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
- 
-      # Instalar dependências
-      - name: Install Dependencies
-        run: npm ci
 
-      # Executar os testes do Cypress
+      # 3️⃣ Limpar cache do Node.js (Mantido igual)
+      - name: Limpar cache do Node.js
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      # 4️⃣ Instalar dependências (Movido antes da verificação de arquivos)
+      - name: Install Dependencies
+        run: npm ci  # 🔹 Agora todas as dependências são instaladas antes de verificar arquivos
+
+      # 5️⃣ Verificar arquivos na pipeline (Movido para depois da instalação)
+      - name: Verificar arquivos na pipeline
+        run: ls -R cypress/e2e/features/  # 🔹 Agora só roda depois das dependências estarem instaladas
+
+      # 6️⃣ Executar os testes do Cypress
       - name: Run Cypress Tests + Cucumber
         run: |
           npx cypress run --spec "cypress/e2e/features/**/*.feature"
 
-      # Gerar o relatório HTML consolidado
+      # 7️⃣ Gerar o relatório HTML consolidado
       - name: Generate Test Report
         run: |
           npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json
           npx mochawesome-report-generator cypress/reports/report.json -o cypress/reports/html
 
-      # Fazer upload do relatório como artefato
+      # 8️⃣ Fazer upload do relatório como artefato
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
